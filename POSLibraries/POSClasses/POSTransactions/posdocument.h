@@ -27,10 +27,18 @@ protected:
         return &m_doctype;
     }
 
+    virtual bool Active() const
+    {
+        return m_active;
+    }
+
+    virtual void Open();
+
 private:
     DocItemLines_Ptr m_itemlines;
 
     QString m_doctype;
+    bool m_active;
 };
 
 #endif // POSDOCUMENT_H

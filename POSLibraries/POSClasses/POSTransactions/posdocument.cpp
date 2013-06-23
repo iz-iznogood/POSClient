@@ -1,5 +1,7 @@
 #include "posdocument.h"
 
+#include "posexception.h"
+
 POSDocument::POSDocument() :
     m_itemlines(new DocItemLines())
 {
@@ -27,4 +29,12 @@ void POSDocument::AddChild(IPOSSerializable_Ptr child)
         m_itemlines->append(item);
     else
         throw POSException(esError, etBusiness, 1, "Attempt to add child to document which is not DocItemLine");
+}
+
+void POSDocument::Open()
+{
+    if (m_active)
+        throw POSException(esError, etBusiness, 1, "Document is already open");
+
+    m_active = true;
 }

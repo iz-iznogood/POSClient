@@ -38,6 +38,9 @@ public:
     virtual IPOSDocItemLine_Ptr itemLine(const int i) const = 0;
 
     virtual const QString* DocType() const = 0;
+    virtual bool Active() const = 0;
+
+    virtual void Open() = 0;
 };
 
 class IPOSSalesDocument : virtual public IPOSDocument
