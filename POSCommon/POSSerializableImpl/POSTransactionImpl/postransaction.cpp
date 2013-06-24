@@ -2,7 +2,9 @@
 
 #include <QUuid>
 
-POSTransaction::POSTransaction()
+POSTransaction::POSTransaction():
+    PosSerializable(),
+    IPOSTransaction()
 {
 }
 

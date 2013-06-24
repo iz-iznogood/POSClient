@@ -76,10 +76,11 @@ void POSLibraryManager::POSLibList::LoadLibraries()
         {
             (*it)->Load();
         }
-        QT_CATCH(...)
+        QT_CATCH(POSException& e)
         {
             QString libname = (*it)->getLibName();
             badlibraries.append(libname);
+            Globals->ErrorManager->LogWarning(etSystem, 1, e.what());
             Globals->ErrorManager->LogWarning(etSystem, 1, "Loading Library " + libname + " failed.");
         }
     }
@@ -117,7 +118,6 @@ POSLibraryManager::POSLibraryProxy::POSLibraryProxy(const QString& libname) :
     m_libname(libname)
 {
     m_lib.setFileName(m_libname);
-    m_lib.setLoadHints(QLibrary::ExportExternalSymbolsHint);
 }
 
 POSLibraryManager::POSLibraryProxy::~POSLibraryProxy()
@@ -133,7 +133,7 @@ bool POSLibraryManager::POSLibraryProxy::Load()
     {
         bool res = m_lib.load();
         if (!res)
-            QT_THROW(POSException(esError, etSystem, 1, "Unable to load library" + m_lib.fileName()));
+            QT_THROW(POSException(esError, etSystem, 1, QString("Unable to load library %1. Error %2").arg(m_lib.fileName(), m_lib.errorString())));
 
         getLibraryProc proc = (getLibraryProc)(m_lib.resolve("getLibrary"));
         if (proc != NULL)

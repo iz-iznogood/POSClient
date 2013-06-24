@@ -37,19 +37,19 @@ void POSStorageManager::Initialize()
 
     for(QStringList::const_iterator it = m_registeredtables_ptr->begin(); it != m_registeredtables_ptr->end(); ++it)
     {
-        IPOSDataTable* table = dynamic_cast<IPOSDataTable*>(Globals->LibraryManager->CreateObject(*it));
-        if (table == NULL)
+        IPOSDataTable_Ptr table(dynamic_cast<IPOSDataTable*>(Globals->LibraryManager->CreateObject(*it)));
+        if (table.isNull())
             QT_THROW(POSException(esError, etSystem, 1, "Unable to create database table " + *it));
 
         m_datatables->insert(*it, table);
     }
 
-    QList<IPOSDataTable*> tables = m_datatables->values();
+    QList<IPOSDataTable_Ptr> tables = m_datatables->values();
     if (!m_db.transaction())
         QT_THROW(POSException(esError, etSystem, 1, "Unable to begin transaction"));
     QT_TRY
     {
-        for(QList<IPOSDataTable*>::const_iterator it = tables.begin(); it != tables.end(); ++it)
+        for(QList<IPOSDataTable_Ptr>::const_iterator it = tables.begin(); it != tables.end(); ++it)
             (*it)->CheckSchema();
         m_db.commit();
     }
@@ -62,6 +62,8 @@ void POSStorageManager::Initialize()
 
 void POSStorageManager::Finalize()
 {
+    m_datatables->clear();
+
     if (m_db.isOpen())
         m_db.close();
 }

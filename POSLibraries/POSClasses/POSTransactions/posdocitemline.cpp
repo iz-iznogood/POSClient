@@ -1,5 +1,7 @@
 #include "posdocitemline.h"
 
-POSDocItemLine::POSDocItemLine()
+POSDocItemLine::POSDocItemLine() :
+    POSTransaction(),
+    IPOSDocItemLine()
 {
 }

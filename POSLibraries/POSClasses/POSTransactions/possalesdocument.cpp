@@ -4,6 +4,8 @@
 
 static Registrator<POSSalesDocument> _register(REG_POSTRANSACTION_SALESDOCUMENT);
 
-POSSalesDocument::POSSalesDocument()
+POSSalesDocument::POSSalesDocument() :
+    POSDocument(),
+    IPOSSalesDocument()
 {
 }

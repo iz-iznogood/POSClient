@@ -2,6 +2,8 @@
 
 static Registrator<POSSaleDocItemLine> _register(REG_POSTRANSACTION_SALESDOCITEMLINE);
 
-POSSaleDocItemLine::POSSaleDocItemLine()
+POSSaleDocItemLine::POSSaleDocItemLine() :
+    POSDocItemLine(),
+    IPOSSaleDocItemLine()
 {
 }

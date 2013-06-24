@@ -70,6 +70,7 @@ void FinalizeGlobals()
     Globals->DeviceManager->Finalize();
     Globals->StorageManager->Finalize();
 
+    Globals->Document.clear();
     Globals->DeviceManager.clear();
     Globals->DataInfoManager.clear();
     Globals->StorageManager.clear();

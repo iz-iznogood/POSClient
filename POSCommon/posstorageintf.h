@@ -19,6 +19,8 @@ public:
     virtual quint32 recCount() = 0;
 };
 
+typedef QSharedPointer<IPOSDataTable> IPOSDataTable_Ptr;
+
 class IPOSItem : virtual public IPOSDataTable
 {
 public:

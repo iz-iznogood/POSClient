@@ -38,3 +38,5 @@ QT       += core gui sql
 
 FORMS += \
     posmainform.ui
+
+DESTDIR = /home/chriss/QtProjects/bin

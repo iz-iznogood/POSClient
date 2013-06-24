@@ -38,3 +38,4 @@ INCLUDEPATH += \
             ../../../POSCommon/POSStorageImpl \
             ../../../POSComponents
 
+DESTDIR = /home/chriss/QtProjects/bin/Libraries

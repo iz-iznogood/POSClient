@@ -15,7 +15,6 @@ IPOSLibrary* getLibrary()
 
 POSGlobals* _Globals = NULL;
 
-
 POSLibrary::POSLibrary()
     : IPOSLibrary(),
       m_instantiator_ptr(new Instantiator()),

@@ -10,7 +10,7 @@
 
 #include "posstorageintf.h"
 
-typedef QMap<QString, IPOSDataTable*> POSDataTables;
+typedef QMap<QString, IPOSDataTable_Ptr> POSDataTables;
 typedef QSharedPointer<POSDataTables> POSDataTables_Ptr;
 
 class POSStorageManager : public QObject, public IPOSStorageManager

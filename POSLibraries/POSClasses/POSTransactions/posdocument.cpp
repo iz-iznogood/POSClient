@@ -3,6 +3,8 @@
 #include "posexception.h"
 
 POSDocument::POSDocument() :
+    POSTransaction(),
+    IPOSDocument(),
     m_itemlines(new DocItemLines())
 {
 }
