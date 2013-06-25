@@ -8,7 +8,7 @@
 #include <QObject>
 #include <QMetaObject>
 #include <QMetaProperty>
-
+#include <QSharedPointer>
 
 class PosSerializable : virtual public QObject, virtual public IPOSSerializable
 {
@@ -23,29 +23,27 @@ public:
     virtual ~PosSerializable() { }
 
 private:
-
     class FactoryHelper
     {
     public:
-        static IPOSSerializable_Ptr CreateObject(const QString* classname)
+        static IPOSSerializable* CreateObject(const QString* classname)
         {
-            return IPOSSerializable_Ptr(dynamic_cast<IPOSSerializable*>(_Globals->LibraryManager->CreateObject(*classname)));
+            return dynamic_cast<IPOSSerializable*>(_Globals->LibraryManager->CreateObject(*classname));
         }
     };
 
-    typedef BinaryWriter<IPOSSerializable_Ptr> POSBinaryWriter;
-    typedef BinaryReader<IPOSSerializable_Ptr, PosSerializable::FactoryHelper> POSBinaryReader;
+    typedef BinaryWriter<IPOSSerializable*> POSBinaryWriter;
+    typedef BinaryReader<IPOSSerializable*, PosSerializable::FactoryHelper> POSBinaryReader;
 
-    virtual void Serialize()
+    virtual void Serialize(PropertyBag_Ptr bag)
     {
-        PosSerializable::POSBinaryWriter writer(IPOSSerializable_Ptr(this));
+        POSBinaryWriter writer(this, bag);
         writer.WriteObject();
     }
 
-    virtual void DeSerialize()
+    virtual void Deserialize(PropertyBag_Ptr bag)
     {
-        PropertyBag_Ptr bag(new PropertyBag);
-        PosSerializable::POSBinaryReader reader(bag, IPOSSerializable_Ptr(this));
+        POSBinaryReader reader(bag, this);
         reader.ReadObject();
     }
 

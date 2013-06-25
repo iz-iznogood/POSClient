@@ -9,18 +9,17 @@
 
 class IPOSSerializable;
 
-typedef QSharedPointer<IPOSSerializable> IPOSSerializable_Ptr;
-typedef QList<IPOSSerializable_Ptr> IPOSSerializables;
+typedef QList<IPOSSerializable*> IPOSSerializables;
 typedef QSharedPointer<IPOSSerializables> IPOSSerializables_Ptr;
 
 class IPOSSerializable : virtual public IPOSObject
 {
 public:
-    virtual void Serialize() = 0;
-    virtual void DeSerialize() = 0;
+    virtual void Serialize(PropertyBag_Ptr bag) = 0;
+    virtual void Deserialize(PropertyBag_Ptr bag) = 0;
 
     virtual void GetChildren(IPOSSerializables* list) = 0;
-    virtual void AddChild(IPOSSerializable_Ptr child) = 0;
+    virtual void AddChild(IPOSSerializable* child) = 0;
 
     virtual int PropertyCount() const = 0;
     virtual const QString ClassName() const = 0;

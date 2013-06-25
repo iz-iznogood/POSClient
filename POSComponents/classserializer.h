@@ -40,6 +40,11 @@ public:
         m_bag(new PropertyBag())
     { }
 
+    BinaryWriter(const T_Serializable_Ptr obj, PropertyBag_Ptr bag) :
+        m_root(obj),
+        m_bag(bag)
+    { }
+
     void WriteObject()
     {
         if (m_root->PropertyCount() != 0)
@@ -91,7 +96,7 @@ public:
         m_bag(bag)
     { }
 
-    explicit BinaryReader(PropertyBag_Ptr bag, T_Serializable_Ptr obj) :
+    BinaryReader(PropertyBag_Ptr bag, T_Serializable_Ptr obj) :
         m_bag(bag),
         m_root(obj)
     { }

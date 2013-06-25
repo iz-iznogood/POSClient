@@ -21,7 +21,7 @@ protected:
 
     }
 
-    virtual void AddChild(IPOSSerializable_Ptr )
+    virtual void AddChild(IPOSSerializable* )
     {
         throw POSException(esError, etBusiness, 1, "DocItemLine does not support child records");
     }

@@ -2,6 +2,9 @@
 
 POSDocItemLine::POSDocItemLine() :
     POSTransaction(),
-    IPOSDocItemLine()
+    IPOSDocItemLine(),
+    m_itemcode(""),
+    m_itemdescription(""),
+    m_qty(0)
 {
 }

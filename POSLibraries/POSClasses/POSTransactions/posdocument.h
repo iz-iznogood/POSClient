@@ -18,9 +18,10 @@ public:
 
 protected:
     virtual IPOSDocItemLine_Ptr itemLine(const int i) const;
+    virtual void addItemLine(const IPOSDocItemLine_Ptr itemline);
 
     virtual void GetChildren(IPOSSerializables* list);
-    virtual void AddChild(IPOSSerializable_Ptr child);
+    virtual void AddChild(IPOSSerializable* child);
 
     virtual const QString* DocType() const
     {

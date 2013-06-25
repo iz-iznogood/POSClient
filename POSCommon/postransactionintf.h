@@ -36,6 +36,7 @@ class IPOSDocument : virtual public IPOSTransaction
 {
 public:
     virtual IPOSDocItemLine_Ptr itemLine(const int i) const = 0;
+    virtual void addItemLine(const IPOSDocItemLine_Ptr itemline) = 0;
 
     virtual const QString* DocType() const = 0;
     virtual bool Active() const = 0;

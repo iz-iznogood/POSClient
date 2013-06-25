@@ -5,7 +5,9 @@
 POSDocument::POSDocument() :
     POSTransaction(),
     IPOSDocument(),
-    m_itemlines(new DocItemLines())
+    m_itemlines(new DocItemLines()),
+    m_doctype(""),
+    m_active(false)
 {
 }
 
@@ -18,15 +20,20 @@ IPOSDocItemLine_Ptr POSDocument::itemLine(const int i) const
                            arg(QString::number(i)));
 }
 
+void POSDocument::addItemLine(const IPOSDocItemLine_Ptr itemline)
+{
+    m_itemlines->append(itemline);
+}
+
 void POSDocument::GetChildren(IPOSSerializables* list)
 {
     for(DocItemLines::const_iterator it = m_itemlines->begin(); it != m_itemlines->end(); ++it)
-        list->append((*it).dynamicCast<IPOSSerializable>());
+        list->append(dynamic_cast<IPOSSerializable*>((*it).data()));
 }
 
-void POSDocument::AddChild(IPOSSerializable_Ptr child)
+void POSDocument::AddChild(IPOSSerializable* child)
 {
-    IPOSDocItemLine_Ptr item = child.dynamicCast<IPOSDocItemLine>();
+    IPOSDocItemLine_Ptr item(dynamic_cast<IPOSDocItemLine*>(child));
     if (item.isNull())
         m_itemlines->append(item);
     else
