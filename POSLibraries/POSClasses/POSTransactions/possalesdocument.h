@@ -15,6 +15,17 @@ class POSSalesDocument : virtual public POSDocument, virtual public IPOSSalesDoc
 
 public:
     POSSalesDocument();
+
+    virtual const QString ClassID() const
+    {
+        return _ClassID();
+    }
+
+    static const QString _ClassID()
+    {
+        return REG_POSTRANSACTION_SALESDOCUMENT;
+    }
+
 };
 
 #endif // POSSALESDOCUMENT_H

@@ -51,11 +51,6 @@ private:
         return metaObject()->propertyCount();
     }
 
-    virtual const QString ClassName() const
-    {
-        return QString(metaObject()->className());
-    }
-
     virtual const PropertyInformation PropertyInfo(int i) const
     {
         QMetaProperty prop = metaObject()->property(i);

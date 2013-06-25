@@ -2,7 +2,7 @@
 
 #include "poslibrary.h"
 
-static Registrator<POSSalesDocument> _register(REG_POSTRANSACTION_SALESDOCUMENT);
+static Registrator<POSSalesDocument> _register(POSSalesDocument::_ClassID());
 
 POSSalesDocument::POSSalesDocument() :
     POSDocument(),

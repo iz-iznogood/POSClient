@@ -1,6 +1,6 @@
 #include "possaledocitemline.h"
 
-static Registrator<POSSaleDocItemLine> _register(REG_POSTRANSACTION_SALESDOCITEMLINE);
+static Registrator<POSSaleDocItemLine> _register(POSSaleDocItemLine::_ClassID());
 
 POSSaleDocItemLine::POSSaleDocItemLine() :
     POSDocItemLine(),

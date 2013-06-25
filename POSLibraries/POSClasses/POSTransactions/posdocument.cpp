@@ -34,7 +34,7 @@ void POSDocument::GetChildren(IPOSSerializables* list)
 void POSDocument::AddChild(IPOSSerializable* child)
 {
     IPOSDocItemLine_Ptr item(dynamic_cast<IPOSDocItemLine*>(child));
-    if (item.isNull())
+    if (!item.isNull())
         m_itemlines->append(item);
     else
         throw POSException(esError, etBusiness, 1, "Attempt to add child to document which is not DocItemLine");

@@ -22,7 +22,7 @@ public:
     virtual void AddChild(IPOSSerializable* child) = 0;
 
     virtual int PropertyCount() const = 0;
-    virtual const QString ClassName() const = 0;
+    virtual const QString ClassID() const = 0;
     virtual const PropertyInformation PropertyInfo(int i) const = 0;
     virtual const QVariant PropertyValue(const QString propName) const = 0;
     virtual void SetProperty(const QString propName, const QVariant propValue) = 0;

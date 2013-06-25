@@ -10,7 +10,7 @@
 typedef QMap<QString, QVariant> PropertyBag;
 typedef QSharedPointer<PropertyBag> PropertyBag_Ptr;
 
-const QString _classname = "_CLASSNAME";
+const QString _classid = "_CLASSID";
 const QString _children = "_CHILDREN";
 
 class PropertyInformation
@@ -49,7 +49,7 @@ public:
     {
         if (m_root->PropertyCount() != 0)
         {
-            (*m_bag)[_classname] = m_root->ClassName();
+            (*m_bag)[_classid] = m_root->ClassID();
             for (int i = 0; i < m_root->PropertyCount(); ++i)
             {
                 PropertyInformation prop = m_root->PropertyInfo(i);
@@ -93,7 +93,8 @@ class BinaryReader
 {
 public:
     explicit BinaryReader(PropertyBag_Ptr bag) :
-        m_bag(bag)
+        m_bag(bag),
+        m_root(NULL)
     { }
 
     BinaryReader(PropertyBag_Ptr bag, T_Serializable_Ptr obj) :
@@ -103,16 +104,16 @@ public:
 
     void ReadObject()
     {
-        if (!m_bag->contains(_classname))
-            throw "Invalid ClassName";
-        QString classname = (*m_bag)[_classname].toString();
-        if (classname.isEmpty() || classname.isNull())
-            throw "Invalid ClassName";
+        if (!m_bag->contains(_classid))
+            throw "Invalid ClassID";
+        QString classid = (*m_bag)[_classid].toString();
+        if (classid.isEmpty() || classid.isNull())
+            throw "Invalid ClassID";
 
         if (m_root == NULL)
-            m_root = CreateObject(&classname);
-        else if (m_root->ClassName() != classname)
-            throw "Root Object Has Different Classname from Stream Object";
+            m_root = CreateObject(&classid);
+        else if (m_root->ClassID() != classid)
+            throw "Root Object Has Different ClassID from Stream Object";
 
         if (m_root->PropertyCount() != 0)
         {
@@ -130,9 +131,9 @@ public:
     const T_Serializable_Ptr Object() const { return m_root; }
 
 private:
-    T_Serializable_Ptr CreateObject(const QString* classname)
+    T_Serializable_Ptr CreateObject(const QString* classid)
     {
-        return T_Factory::CreateObject(classname);
+        return T_Factory::CreateObject(classid);
     }
 
     void ReadChildren()

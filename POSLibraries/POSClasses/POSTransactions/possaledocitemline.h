@@ -9,6 +9,16 @@ class POSSaleDocItemLine : virtual public POSDocItemLine, virtual public IPOSSal
 
 public:
     POSSaleDocItemLine();
+
+    virtual const QString ClassID() const
+    {
+        return _ClassID();
+    }
+
+    static const QString _ClassID()
+    {
+        return REG_POSTRANSACTION_SALESDOCITEMLINE;
+    }
 };
 
 #endif // POSSALEDOCITEMLINE_H
