@@ -8,7 +8,6 @@
 #include <QObject>
 #include <QMetaObject>
 #include <QMetaProperty>
-#include <QSharedPointer>
 
 class PosSerializable : virtual public QObject, virtual public IPOSSerializable
 {
